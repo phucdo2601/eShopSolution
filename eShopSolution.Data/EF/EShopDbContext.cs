@@ -1,5 +1,6 @@
 ﻿using eShopSolution.Data.Configurations;
 using eShopSolution.Data.Entities;
+using eShopSolution.Data.Extensions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,10 @@ namespace eShopSolution.Data.EF
             modelBuilder.ApplyConfiguration(new ProductTranslationConfiguration());
             modelBuilder.ApplyConfiguration(new PromotionConfiguration());
             modelBuilder.ApplyConfiguration(new TransactionConfiguration());
+
+            //Data Seeding - Tao da mau
+            modelBuilder.Seed();
+
 
             //base.OnModelCreating(modelBuilder);
         }
