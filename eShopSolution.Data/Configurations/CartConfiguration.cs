@@ -20,6 +20,9 @@ namespace eShopSolution.Data.Configurations
             // lien ket khoa ngoai (ProductId) den bang Product
             builder.HasOne(x=> x.Product).WithMany(x => x.Carts).HasForeignKey(x => x.ProductId);
 
+            // lien ket khoa ngoai (UserId) den bang AppUser
+            builder.HasOne(x => x.AppUser).WithMany(x => x.Carts).HasForeignKey(x => x.UserId);
+
         }
     }
 

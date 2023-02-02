@@ -28,6 +28,9 @@ namespace eShopSolution.Data.Configurations
 
 
             builder.Property(x => x.ShipPhoneNumber).IsRequired().HasMaxLength(200);
+
+            // lien ket khoa ngoai (UserId) den bang AppUser
+            builder.HasOne(x => x.AppUser).WithMany(x => x.Orders).HasForeignKey(x => x.UserId);
         }
     }
 }
