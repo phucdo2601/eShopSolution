@@ -5,3 +5,10 @@
 
 ## How to configure and run
 ## How to configure
+
+## Install Packages
+ - Microsoft.EntityFrameworkCore
+ - Microsoft.EntityFrameworkCore.Design
+ - Microsoft.EntityFrameworkCore.Relational
+ - Microsoft.EntityFrameworkCore.SqlServer
+ - Microsoft.EntityFrameworkCore.Tools
