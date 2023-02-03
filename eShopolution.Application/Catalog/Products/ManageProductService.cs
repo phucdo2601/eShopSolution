@@ -73,11 +73,6 @@ namespace eShopolution.Application.Catalog.Products
             return await _eShopDbContext.SaveChangesAsync();
         }
 
-        public Task<List<ProductViewModel>> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<PagedResult<ProductViewModel>> GetAllPaging(GetProductPagingRequest request)
         {
             //1. Select Join
@@ -131,19 +126,51 @@ namespace eShopolution.Application.Catalog.Products
             return pagedResult;
         }
 
-        public Task<int> Update(ProductUpdateRequest request)
+        public async Task<int> Update(ProductUpdateRequest request)
         {
-            throw new NotImplementedException();
+            var product = await  _eShopDbContext.Products.FindAsync(request.Id);
+
+            var productTranlations = await _eShopDbContext.ProductTranslations.FirstOrDefaultAsync(x => x.ProductId == request.Id && x.LanguageId == request.LanguageId);
+
+            if (product == null || productTranlations == null)
+            {
+                throw new EShopException($"Cannot find a product with id: {request.Id}");
+            }
+
+            productTranlations.Name = request.Name;
+            productTranlations.SeoAlias= request.SeoAlias;
+            productTranlations.SeoDescription = request.SeoDescription;
+            productTranlations.SeoTitle = request.SeoTitle;
+            productTranlations.Description = request.Description;
+            productTranlations.Details = request.Details;
+
+            return await _eShopDbContext.SaveChangesAsync();
+
         }
 
-        public Task<int> UpdatePrice(int productId, decimal newPrice)
+        public async Task<bool> UpdatePrice(int productId, decimal newPrice)
         {
-            throw new NotImplementedException();
+            var product = await _eShopDbContext.Products.FindAsync(productId);
+            if (product == null )
+            {
+                throw new EShopException($"Cannot find a product with id: {productId}");
+            }
+            
+            product.Price = newPrice;
+            return await _eShopDbContext.SaveChangesAsync() > 0;
         }
 
-        public Task<bool> UpdateStock(int productId, int addedQuantity)
+        public async Task<bool> UpdateStock(int productId, int addedQuantity)
         {
-            throw new NotImplementedException();
+            var product = await _eShopDbContext.Products.FindAsync(productId);
+            if (product == null)
+            {
+                throw new EShopException($"Cannot find a product with id: {productId}");
+            }
+
+            product.Stock += addedQuantity;
+
+            return await _eShopDbContext.SaveChangesAsync() > 0;
         }
     }
 }

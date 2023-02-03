@@ -7,6 +7,6 @@ namespace eShopolution.Application.Catalog.Products.Dtos.Public
 {
     public class GetProductPagingRequest : PagingRequestPage
     {
-        public int CategoyId { get; set; }
+        public int? CategoryId { get; set; }
     }
 }
