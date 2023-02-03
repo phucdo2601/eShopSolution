@@ -1,13 +1,15 @@
-﻿using eShopSolution.Data.Entities;
+﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace eShopolution.Application.Catalog.Products.Dtos.Manage
+namespace eShopSolution.ViewModel.Catalog.Products.Manage
 {
-    public class ProductUpdateRequest
+    public class ProductCreateRequest
     {
-        public int Id { set; get; }
+        public decimal Price { set; get; }
+        public decimal OriginalPrice { set; get; }
+        public int Stock { set; get; }
         public string Name { set; get; }
         public string Description { set; get; }
         public string Details { set; get; }
@@ -16,5 +18,8 @@ namespace eShopolution.Application.Catalog.Products.Dtos.Manage
 
         public string SeoAlias { get; set; }
         public string LanguageId { set; get; }
+
+        public IFormFile ThumbnailImage { get; set; }
+
     }
 }
